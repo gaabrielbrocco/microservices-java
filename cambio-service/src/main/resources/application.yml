@@ -16,7 +16,7 @@ spring:
         format_sql: true
   flyway:
     locations:
-    - classpath:/db_migration
+      - classpath:/db_migration
   cache:
     type: caffeine
     caffeine:
@@ -35,7 +35,7 @@ management:
     web:
       exposure:
         include:
-        - '*'
+          - '*'
 resilience4j:
   circuitbreaker:
     instances:
@@ -47,4 +47,3 @@ resilience4j:
         waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 3
         automatic-transition-from-open-to-half-open-enabled: true
-      

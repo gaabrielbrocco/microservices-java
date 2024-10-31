@@ -33,7 +33,7 @@ public class SaudacaoController {
 	public ResponseEntity<String> getSaudacao(
 			@RequestParam(required = false) String nome,
 			@PathVariable(required = false) String nomePath,
-			@RequestHeader("Usuario") String usuario) {) {
+			@RequestHeader("Usuario") String usuario) {
 		
 		if (nome == null) 
 			nome = nomePath == null ? saudacaoConfig.getNomePadrao() : nomePath;
