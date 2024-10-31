@@ -7,21 +7,31 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ApiGatewayConfig {
-	
+
 	@Bean
-	RouteLocator getGatewayRoute (RouteLocatorBuilder builder) {
+	RouteLocator getRoutes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route(route -> route
+				.route(rota -> rota
+						.path("/get")
+						.filters(f -> f
+								.addRequestHeader("Usuario", "Fulano")
+								.addRequestParameter("Parametro", "ValorParametro")
+								.addResponseHeader("Servidor", "meuServer"))
+						.uri("http://httpbin.org"))
+				.route(rota -> rota
 						.path("/cambio-service/**")
-						.filters(f -> f.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
+						.filters(f -> f
+								.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
 						.uri("lb://cambio-service"))
-				.route(route -> route
+				.route(rota -> rota
 						.path("/produto-service/**")
-						.filters(f -> f.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
+						.filters(f -> f
+								.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
 						.uri("lb://produto-service"))
-				.route(route -> route
+				.route(rota -> rota
 						.path("/saudacao-service/**")
-						.filters(f -> f.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
+						.filters(f -> f
+								.addRequestHeader("Usuario", "Gabriel Brocco de Oliveira"))
 						.uri("lb://saudacao-service"))
 				.build();
 	}
